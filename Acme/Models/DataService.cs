@@ -29,5 +29,18 @@
             return dogs
                  .FirstOrDefault(x => x.Id == id);
         }
+
+        internal void Edit(Dog dog)
+        {
+            var index = dogs.FindIndex(x => x.Id == dog.Id);
+            dogs[index] = dog;
+
+        }
+
+        internal void Delete(Dog dog)
+        {
+            var index = dogs.FindIndex(x => x.Id == dog.Id);
+            dogs.RemoveAt(index);
+        }
     }
 }

@@ -12,6 +12,9 @@
         @foreach (var item in Model)
         {
             <li>@item.Name @item.Age </li>
+            <a href="/dogs/edit/@item.Id" ><button>Update</button></a>
+            <form method="post" action="/dogs/delete/@item.Id" style="display: inline-block" ><button style="color: red; border-color:red;">Delete</button></form>
+
         }
     </ul>
     <a href="dogs/create">Create a new Dog</a>

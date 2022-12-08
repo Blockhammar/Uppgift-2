@@ -1,0 +1,23 @@
+﻿@using Uppgift2.Models
+@model Dog
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <title>Edit Dog</title>
+</head>
+<body>
+    <h1>Edit Dog</h1>
+    <form method="post">
+        <label>Name</label>
+        <input type="text" name="Name" value="@Model.Name"/>
+
+        <label>Age</label>
+        <input type="text" name="Age" value="@Model.Age" />
+
+        
+        <br />
+        <input type="submit" value="Update" />
+    </form>
+</body>
+</html>
