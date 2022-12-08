@@ -1,0 +1,19 @@
+﻿@using Uppgift2.Models
+@model Dog[]
+<html>
+<head>
+    <title>Dogs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+</head>
+<body>
+    <h1>Dogs</h1>
+
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>@item.Name @item.Age </li>
+        }
+    </ul>
+    <a href="dogs/create">Create a new Dog</a>
+</body>
+</html>
