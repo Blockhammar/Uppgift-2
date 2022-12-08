@@ -13,8 +13,9 @@ namespace Uppgift2.Models
         {
             if(dogs.Count == 0)
             {
-                string fileName = @"C:\Users\jocka\Source\Repos\Blockhammar\Uppgift-2\Acme\Storage\Dogs.json";
-                string jsonString = File.ReadAllText(fileName);
+                string fileName = @"\Storage\Dogs.json";
+                string path = Environment.CurrentDirectory + fileName;
+                string jsonString = File.ReadAllText(path);
                 Dog[] dogArray = JsonSerializer.Deserialize<Dog[]>(jsonString);
                 dogs = dogArray.ToList();
             }
@@ -23,9 +24,10 @@ namespace Uppgift2.Models
         void saveToDisk()
         {
             // Save to disk
-            string fileName = @"C:\Users\jocka\Source\Repos\Blockhammar\Uppgift-2\Acme\Storage\Dogs.json";
+            string fileName = @"\Storage\Dogs.json";
+            string path = Environment.CurrentDirectory + fileName;
             string jsonString = JsonSerializer.Serialize(dogs);
-            File.WriteAllText(fileName, jsonString);
+            File.WriteAllText(path, jsonString);
         }
 
         public Dog[] GetAllDogs()
