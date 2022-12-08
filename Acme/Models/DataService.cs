@@ -1,14 +1,32 @@
-﻿namespace Uppgift2.Models
+﻿using System.Text.Json;
+
+namespace Uppgift2.Models
 {
     public class DataService
     {
         // "Fake" DB
         static List<Dog> dogs = new List<Dog>
         {
-            new Dog { Id = 20, Name = "Taylor", Age = 5},
-            new Dog { Id = 10, Name = "Gibson", Age = 5},
-            new Dog { Id = 30, Name = "Roland", Age = 5},
+
         };
+        public DataService()
+        {
+            if(dogs.Count == 0)
+            {
+                string fileName = @"C:\Users\jocka\Source\Repos\Blockhammar\Uppgift-2\Acme\Storage\Dogs.json";
+                string jsonString = File.ReadAllText(fileName);
+                Dog[] dogArray = JsonSerializer.Deserialize<Dog[]>(jsonString);
+                dogs = dogArray.ToList();
+            }
+        }
+
+        void saveToDisk()
+        {
+            // Save to disk
+            string fileName = @"C:\Users\jocka\Source\Repos\Blockhammar\Uppgift-2\Acme\Storage\Dogs.json";
+            string jsonString = JsonSerializer.Serialize(dogs);
+            File.WriteAllText(fileName, jsonString);
+        }
 
         public Dog[] GetAllDogs()
         {
@@ -22,6 +40,7 @@
         {
             dog.Id = dogs.Max(o => o.Id) + 1;
             dogs.Add(dog);
+            saveToDisk();
         }
 
         public Dog GetDogById(int id)
@@ -34,6 +53,7 @@
         {
             var index = dogs.FindIndex(x => x.Id == dog.Id);
             dogs[index] = dog;
+            saveToDisk();
 
         }
 
@@ -41,6 +61,7 @@
         {
             var index = dogs.FindIndex(x => x.Id == dog.Id);
             dogs.RemoveAt(index);
+            saveToDisk();
         }
     }
 }
