@@ -5,19 +5,24 @@ namespace Uppgift2.Models
     public class DataService
     {
         // "Fake" DB
-        static List<Dog> dogs = new List<Dog>
-        {
-
-        };
+        static List<Dog> dogs;
         public DataService()
         {
-            if(dogs.Count == 0)
+            if(dogs == null)
             {
                 string fileName = @"\Storage\Dogs.json";
                 string path = Environment.CurrentDirectory + fileName;
                 string jsonString = File.ReadAllText(path);
-                Dog[] dogArray = JsonSerializer.Deserialize<Dog[]>(jsonString);
-                dogs = dogArray.ToList();
+                Dog[]? dogArray = JsonSerializer.Deserialize<Dog[]>(jsonString);
+                if(dogArray != null)
+                {
+                    dogs = dogArray.ToList();
+
+                }
+                else
+                {
+                    dogs = new List<Dog>();
+                }
             }
         }
 
